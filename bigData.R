@@ -64,7 +64,12 @@ library(rsparkling)
 library(SparkR)
  library(dplyr)
  sc <- spark_connect(master = "local", version = "2.2.0")
- 
+  library(h2o)
+ h2o.init()
+ DOSSIER.hex = h2o.importFile(path = "B16_DOSSIER_DATA_TABLE.csv",destination_frame = "DOSSIER.hex")
+ h2o.ls() #to check
+ h2o.clusterInfo() #info
+ colnames(DOSSIER.hex)
  
 ##%######################################################%##
 #                                                          #
