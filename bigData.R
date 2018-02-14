@@ -1,6 +1,6 @@
 ptm=proc.time() #start time 
 B16DOSSIER <- read.csv("B16_DOSSIER_DATA_TABLE.csv") # download from OPI server
-proc.time()-ptm #160 secondes 
+proc.time()-ptm #140 secondes 
 format(object.size(B16DOSSIER),"Mb") #"676.8 Mb"
 
 
@@ -41,18 +41,31 @@ dossier=as.data.frame(DOSSIER.ff)
 ####                 data.table package                 ####
 #                                                          #
 ##%######################################################%##
+library(data.table)
 ptm=proc.time()
 DOSSIER.dt=fread("B16_DOSSIER_DATA_TABLE.csv",stringsAsFactors=TRUE)
 proc.time()-ptm 
-format(object.size(DOSSIER.dt),"Mb") #
+format(object.size(DOSSIER.dt),"Mb") # "676.8 Mb"
 
 
+##%######################################################%##
+#                                                          #
+####                     spark H2O                      ####
+#                                                          #
+##%######################################################%##
 
-
-
-
-
-
+library(spark)
+library(sparklyr)
+ #spark_install(version = "2.2.0", hadoop_version = "2.6")
+ #devtools::install_github("h2oai/rsparkling", ref = "master")
+ #install.packages("h2o", type = "source",repos = "https://h2o-release.s3.amazonaws.com/h2o/rel-weierstrass/2/R")
+library(rsparkling)
+ 
+library(SparkR)
+ library(dplyr)
+ sc <- spark_connect(master = "local", version = "2.2.0")
+ 
+ 
 ##%######################################################%##
 #                                                          #
 ####                 BIG MEMORY PACKAGE                 ####
